@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Signing Website</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="d-flex flex-column min-vh-100">
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">E-Signing</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://bhanupraksh29.github.io/servicesection/">Our Services</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <main class="container mt-5 flex-grow-1">
+        <section id="esign">
+          <h2>E-Sign Your Document</h2>
+          <form id="esign-form" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="signature">Signature:</label>
+              <div>
+                <canvas
+                  id="signature-pad"
+                  width="400"
+                  height="200"
+                  class="border"
+                ></canvas>
+                <button
+                  type="button"
+                  id="clear-button"
+                  class="btn btn-danger mt-2"
+                >
+                  Clear
+                </button>
+                <button
+                  type="button"
+                  id="undo-button"
+                  class="btn btn-warning mt-2"
+                >
+                  Undo
+                </button>
+              </div>
+            </div>
+            <input type="hidden" id="signature-data" name="signature-data" />
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </section>
+      </main>
+      <footer class="footer bg-dark text-white text-center py-3">
+        <p>&copy; 2024 PDF Tool. All Rights Reserved.</p>
+        <p><a href="#" class="text-white">Privacy Policy</a> | <a href="#" class="text-white">Terms of Service</a> | <a href="#" class="text-white">Contact</a></p>
+      </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

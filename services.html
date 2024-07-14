@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Merger and Splitter</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">PDF Merger and Splitter</h1>
+        
+        <!-- PDF Merger -->
+        <div class="card mb-3">
+            <div class="card-header">Merge PDFs</div>
+            <div class="card-body">
+                <input type="file" id="mergeInput" multiple class="form-control mb-3">
+                <button class="btn btn-primary" onclick="mergePDFs()">Merge PDFs</button>
+                <button class="btn btn-secondary" onclick="resetMergeInput()">Choose Another File</button>
+            </div>
+        </div>
+        
+        <!-- PDF Splitter -->
+        <div class="card">
+            <div class="card-header">Split PDF</div>
+            <div class="card-body">
+                <input type="file" id="splitInput" class="form-control mb-3">
+                <button class="btn btn-primary" onclick="splitPDF()">Split PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script>
+        async function mergePDFs() {
+            const input = document.getElementById('mergeInput');
+            const files = input.files;
+
+            if (files.length < 2) {
+                alert('Please select at least two PDF files to merge.');
+                return;
+            }
+
+            const mergedPdf = await PDFLib.PDFDocument.create();
+
+            for (const file of files) {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
+                const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                copiedPages.forEach((page) => mergedPdf.addPage(page));
+            }
+
+            const mergedPdfBytes = await mergedPdf.save();
+            download(mergedPdfBytes, 'merged.pdf', 'application/pdf');
+        }
+
+        async function splitPDF() {
+            const input = document.getElementById('splitInput');
+            const file = input.files[0];
+
+            if (!file) {
+                alert('Please select a PDF file to split.');
+                return;
+            }
+
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
+
+            for (let i = 0; i < pdf.getPageCount(); i++) {
+                const newPdf = await PDFLib.PDFDocument.create();
+                const [copiedPage] = await newPdf.copyPages(pdf, [i]);
+                newPdf.addPage(copiedPage);
+                const newPdfBytes = await newPdf.save();
+                download(newPdfBytes, `split_page_${i + 1}.pdf`, 'application/pdf');
+            }
+        }
+
+        function download(bytes, filename, mime) {
+            const blob = new Blob([bytes], { type: mime });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function resetMergeInput() {
+            const input = document.getElementById('mergeInput');
+            input.value = '';
+        }
+    </script>
+</body>
+</html>

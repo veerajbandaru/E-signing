@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Merger and Splitter</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1600x900.png?text=DesignSync+Background') no-repeat center center fixed;
+            background-size: cover;
+            color: #f8f9fa;
+            animation: fadeInBody 1s ease-in;
+        }
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeInNavbar 1.5s ease-in;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .container {
+            margin-top: 50px;
+            animation: fadeInContainer 1.5s ease-in;
+        }
+        h1 {
+            color: #ffffff;
+            font-weight: bold;
+            animation: fadeInTitle 2s ease-in;
+        }
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border: none;
+            border-radius: 10px;
+            animation: fadeInCard 1.5s ease-in;
+            transition: transform 0.3s;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card-header {
+            background-color: #343a40;
+            color: white;
+            font-weight: bold;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s, transform 0.3s;
+            animation: fadeInButton 1.8s ease-in;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            transition: background-color 0.3s, transform 0.3s;
+            animation: fadeInButton 1.8s ease-in;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            transform: scale(1.05);
+        }
+        .features {
+            margin-top: 30px;
+            text-align: center;
+            animation: fadeInFeatures 2s ease-in;
+        }
+        .features h2 {
+            color: #ffffff;
+        }
+        .features p {
+            color: #f8f9fa;
+        }
+        .testimonials {
+            margin-top: 50px;
+            text-align: center;
+            animation: fadeInTestimonials 2.5s ease-in;
+        }
+        .testimonials h2 {
+            color: #ffffff;
+        }
+        .testimonials p {
+            color: #f8f9fa;
+            font-style: italic;
+        }
+        .footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            text-align: center;
+            color: #f8f9fa;
+            animation: fadeInFooter 3s ease-in;
+        }
+        @keyframes fadeInBody {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInNavbar {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInContainer {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInTitle {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInCard {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeInButton {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeInFeatures {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInTestimonials {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInFooter {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">PDF Tool</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://bhanupraksh29.github.io/home/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Testimonials</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="text-center">PDF Merger and Splitter</h1>
+        
+        <!-- PDF Merger -->
+        <div class="card mb-4">
+            <div class="card-header">Merge PDFs</div>
+            <div class="card-body">
+                <input type="file" id="mergeInput" multiple class="form-control mb-3">
+                <button class="btn btn-primary" onclick="mergePDFs()">Merge PDFs</button>
+                <button class="btn btn-secondary" onclick="resetMergeInput()">Choose Another File</button>
+            </div>
+        </div>
+        
+        <!-- PDF Splitter -->
+        <div class="card">
+            <div class="card-header">Split PDF</div>
+            <div class="card-body">
+                <input type="file" id="splitInput" class="form-control mb-3">
+                <button class="btn btn-primary" onclick="splitPDF()">Split PDF</button>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features">
+            <h2>Features</h2>
+            <p>Our PDF Merger and Splitter tool provides an easy and efficient way to manage your PDF files. You can merge multiple PDFs into a single file or split a PDF into multiple files with just a few clicks.</p>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div class="testimonials">
+            <h2>Testimonials</h2>
+            <p>"This tool has made my work so much easier. I can now merge and split PDFs in no time!"</p>
+            <p>"A fantastic tool for anyone who frequently works with PDF files."</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 PDF Tool. All Rights Reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact:+91-9866775746</a></p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script>
+        async function mergePDFs() {
+            const input = document.getElementById('mergeInput');
+            const files = input.files;
+
+            if (files.length < 2) {
+                alert('Please select at least two PDF files to merge.');
+                return;
+            }
+
+            const mergedPdf = await PDFLib.PDFDocument.create();
+
+            for (const file of files) {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
+                const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                copiedPages.forEach((page) => mergedPdf.addPage(page));
+            }
+
+            const mergedPdfBytes = await mergedPdf.save();
+            download(mergedPdfBytes, 'merged.pdf', 'application/pdf');
+        }
+
+        async function splitPDF() {
+            const input = document.getElementById('splitInput');
+            const file = input.files[0];
+
+            if (!file) {
+                alert('Please select a PDF file to split.');
+                return;
+            }
+
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
+
+            for (let i = 0; i < pdf.getPageCount(); i++) {
+                const newPdf = await PDFLib.PDFDocument.create();
+                const [copiedPage] = await newPdf.copyPages(pdf, [i]);
+                newPdf.addPage(copiedPage);
+                const newPdfBytes = await newPdf.save();
+                download(newPdfBytes, `split_page_${i + 1}.pdf`, 'application/pdf');
+            }
+        }
+
+        function download(bytes, filename, mime) {
+            const blob = new Blob([bytes], { type: mime });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function resetMergeInput() {
+            const input = document.getElementById('mergeInput');
+            input.value = '';
+        }
+    </script>
+</body>
+</html>
